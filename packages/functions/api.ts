@@ -185,21 +185,13 @@ export async function handler(event: {
     const { address } = event.queryStringParameters;
     checkAddress(address);
 
-    console.log("address", address);
-
     const tokenNumber = await getTokenNumber(address);
     checkTokenNumber(tokenNumber);
-
-    console.log("tokenNumber", tokenNumber);
 
     const tokensOwned = await getTokensOwned(address);
     checkTokensOwned(tokensOwned, tokenNumber);
 
-    console.log("tokensOwned", tokensOwned);
-
     const score = computeScore(tokensOwned);
-
-    console.log("score", score);
 
     return {
       statusCode: 200,
