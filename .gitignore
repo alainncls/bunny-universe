@@ -1,0 +1,40 @@
+# Graph CLI generated artifacts
+build/
+generated/
+
+# Dependency directories
+node_modules/
+
+# Logs
+logs
+*.log
+
+# Optional eslint cache
+.eslintcache
+
+# dotenv environment variables file
+.env
+
+# Testing
+coverage
+coverage.json
+
+.latest.json
+
+# next.js
+.next
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts

@@ -1,0 +1,84 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: N2MERC721A
+    network: linea
+    source:
+      address: "0x2375f81ccd6665ab606239e6602dbb601d35ec77"
+      abi: N2MERC721A
+      startBlock: 13567384
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AffiliateSell
+        - Approval
+        - ApprovalForAll
+        - BatchMetadataUpdate
+        - ConsecutiveTransfer
+        - ContractURIUpdated
+        - DefaultRoyaltySet
+        - Holder
+        - ImmutableTrait
+        - Locked
+        - OwnershipTransferred
+        - TraitMetadataURIUpdated
+        - TraitUpdated
+        - TraitUpdatedList
+        - TraitUpdatedListUniformValue
+        - TraitUpdatedRange
+        - TraitUpdatedRangeUniformValue
+        - Transfer
+        - TransferValidatorUpdated
+        - Unlocked
+        - UpdateUser
+      abis:
+        - name: N2MERC721A
+          file: ./abis/N2MERC721A.json
+      eventHandlers:
+        - event: AffiliateSell(indexed address)
+          handler: handleAffiliateSell
+        - event: Approval(indexed address,indexed address,indexed uint256)
+          handler: handleApproval
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: BatchMetadataUpdate(uint256,uint256)
+          handler: handleBatchMetadataUpdate
+        - event: ConsecutiveTransfer(indexed uint256,uint256,indexed address,indexed address)
+          handler: handleConsecutiveTransfer
+        - event: ContractURIUpdated()
+          handler: handleContractURIUpdated
+        - event: DefaultRoyaltySet(indexed address,uint96)
+          handler: handleDefaultRoyaltySet
+        - event: ImmutableTrait(indexed bytes32,indexed uint256,bytes32)
+          handler: handleImmutableTrait
+        - event: Locked(uint256)
+          handler: handleLocked
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: TraitMetadataURIUpdated()
+          handler: handleTraitMetadataURIUpdated
+        - event: TraitUpdated(indexed bytes32,uint256,bytes32)
+          handler: handleTraitUpdated
+        - event: TraitUpdatedList(indexed bytes32,uint256[])
+          handler: handleTraitUpdatedList
+        - event: TraitUpdatedListUniformValue(indexed bytes32,uint256[],bytes32)
+          handler: handleTraitUpdatedListUniformValue
+        - event: TraitUpdatedRange(indexed bytes32,uint256,uint256)
+          handler: handleTraitUpdatedRange
+        - event: TraitUpdatedRangeUniformValue(indexed bytes32,uint256,uint256,bytes32)
+          handler: handleTraitUpdatedRangeUniformValue
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+        - event: TransferValidatorUpdated(address,address)
+          handler: handleTransferValidatorUpdated
+        - event: Unlocked(uint256)
+          handler: handleUnlocked
+        - event: UpdateUser(indexed uint256,indexed address,uint64)
+          handler: handleUpdateUser
+      file: ./src/bunny-universe.ts
