@@ -5,16 +5,28 @@ export default function Footer() {
   return (
     <>
       <footer>
-        <div className="row-span-full mb-8">
-          Bunny Universe is the first stake-able NFT collection, proudly built
-          on{" "}
+        <div className="row-span-full mb-8 inline-flex flex-row items-center">
+          <Image
+            src={"/logo.png"}
+            alt={"Bunny Universe logo"}
+            width={36}
+            height={36}
+            className={"mr-1"}
+          />
+          is the first stake-able NFT collection, proudly built on
           <a
             className="underline underline-offset-4"
             href="https://linea.build"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Linea
+            <Image
+              src={"/linea.png"}
+              alt={"Linea logo"}
+              width={98}
+              height={36}
+              className={"ml-1"}
+            />
           </a>
         </div>
         <div className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
