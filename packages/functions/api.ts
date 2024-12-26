@@ -133,9 +133,10 @@ const computeEarlyHolder = (ownedSince: string): boolean => {
 };
 
 const computeScore = (tokensOwned: Token[]): number => {
-  let score = 0;
+  const scores = [];
 
   for (const token of tokensOwned) {
+    let score = 0;
     const { days, weeks, months, quarters, semesters } = computePeriods(
       token.ownedSince,
     );
@@ -165,9 +166,11 @@ const computeScore = (tokensOwned: Token[]): number => {
 
     // Semester Bonus
     score += SEMESTER_BONUS * semesters;
+
+    scores.push(score);
   }
 
-  return Math.floor(score);
+  return Math.floor(scores.reduce((a, b) => a + b, 0));
 };
 
 export async function handler(event: {
