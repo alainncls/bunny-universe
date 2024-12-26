@@ -54,7 +54,7 @@ export default function CheckHolding({ address }: CheckHoldingProps) {
           <a
             href={`https://element.market/assets/linea/0x2375f81ccd6665ab606239e6602dbb601d35ec77/${token.id}`}
             target={"_blank"}
-            rel={"noopener"}
+            rel={"noopener noreferrer"}
             className={"underline"}
           >
             {token.id}
