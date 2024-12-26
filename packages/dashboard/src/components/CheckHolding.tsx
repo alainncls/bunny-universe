@@ -35,7 +35,6 @@ export default function CheckHolding({ address }: CheckHoldingProps) {
             },
           },
         );
-        console.log("response", response);
         const tokens = response.data.data.tokens;
         setTokensHeld(tokens);
       } catch (error) {
