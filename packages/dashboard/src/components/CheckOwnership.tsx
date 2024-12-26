@@ -24,7 +24,7 @@ export default function CheckOwnership({ address }: CheckOwnershipProps) {
   return (
     <div>
       {balance && balance > 0 ? (
-        <p>You own {balance.toString()} NFTs</p>
+        <p>🐇 You own {balance.toString()} bunnies</p>
       ) : (
         <p>No NFTs owned</p>
       )}

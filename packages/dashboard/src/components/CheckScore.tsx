@@ -25,5 +25,5 @@ export default function CheckHolding({ address }: CheckHoldingProps) {
     fetchScore();
   }, [address]);
 
-  return score > 0 ? <span>Your score is {score}</span> : null;
+  return score > 0 ? <span>🥕 Your $CARROT points: {score}</span> : null;
 }
