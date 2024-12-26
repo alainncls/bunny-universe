@@ -83,7 +83,7 @@ export default function Footer() {
           >
             <Image
               aria-hidden
-              src="/icons/link.svg"
+              src="/icons/globe.svg"
               alt="Link icon"
               width={24}
               height={24}
