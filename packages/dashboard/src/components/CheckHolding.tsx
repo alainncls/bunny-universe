@@ -1,15 +1,10 @@
 import { Address } from "viem";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Token } from "@/types";
 
 type CheckHoldingProps = {
   address: Address;
-};
-
-type Token = {
-  id: string;
-  owner: string;
-  ownedSince: string;
 };
 
 export default function CheckHolding({ address }: CheckHoldingProps) {
