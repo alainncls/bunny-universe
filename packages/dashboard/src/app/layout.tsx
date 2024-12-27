@@ -1,6 +1,7 @@
 "use client";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "flowbite/dist/flowbite.css";
 import { Web3Provider } from "@/app/Web3Provider";
 import { GoogleTagManager } from "@next/third-parties/google";
 
