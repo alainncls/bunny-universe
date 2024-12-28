@@ -1,6 +1,7 @@
 import { useReadContract } from "wagmi";
 import { Address, erc721Abi } from "viem";
 import { BunnyUniverseContract } from "@/utils/constants";
+import { Card } from "flowbite-react";
 
 type CheckOwnershipProps = {
   address: Address;
@@ -23,11 +24,14 @@ export default function CheckOwnership({ address }: CheckOwnershipProps) {
 
   return (
     <div>
-      {balance && balance > 0 ? (
-        <p>🐇 You own {balance.toString()} bunnies</p>
-      ) : (
-        <p>No NFTs owned</p>
-      )}
+      <Card className="max-w-sm mx-auto text-center">
+        <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+          <p>🐇</p>
+          {balance && balance > 0
+            ? `You own ${balance.toString()} ${balance === BigInt(1) ? "bunny" : "bunnies"}!`
+            : "You don't have any bunny..."}
+        </h3>
+      </Card>
     </div>
   );
 }

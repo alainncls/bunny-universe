@@ -2,14 +2,15 @@ import { Address } from "viem";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { formatDistance } from "date-fns";
-import { Token } from "@/types";
+import { Score, Token } from "@/types";
 import NftCard from "@/components/NftCard";
 
-type CheckHoldingProps = {
+type DisplayTokensProps = {
   address: Address;
+  score: Score;
 };
 
-export default function CheckHolding({ address }: CheckHoldingProps) {
+export default function DisplayTokens({ address, score }: DisplayTokensProps) {
   const [tokensHeld, setTokensHeld] = useState<Token[]>();
 
   useEffect(() => {
@@ -49,18 +50,22 @@ export default function CheckHolding({ address }: CheckHoldingProps) {
 
   return (
     <div className={gridClasses}>
-      {tokensHeld?.map((token) => (
-        <NftCard
-          key={token.id}
-          tokenId={token.id}
-          imageUrl={`https://nftstorage.link/ipfs/QmPt2vS2bsz5JoRHNh6P8VK93Jzfi9XPpP7JjBzPd8Hnod/${token.id}.png`}
-          ownedSince={formatDistance(
-            new Date(parseInt(token.ownedSince) * 1000),
-            new Date(),
-            { addSuffix: true },
-          )}
-        />
-      ))}
+      {tokensHeld?.map((token) => {
+        const tokenScore = score.tokens.find((t) => t.tokenId === token.id);
+        return tokenScore ? (
+          <NftCard
+            key={token.id}
+            tokenId={token.id}
+            imageUrl={`https://nftstorage.link/ipfs/QmPt2vS2bsz5JoRHNh6P8VK93Jzfi9XPpP7JjBzPd8Hnod/${token.id}.png`}
+            ownedSince={formatDistance(
+              new Date(parseInt(token.ownedSince) * 1000),
+              new Date(),
+              { addSuffix: true },
+            )}
+            score={tokenScore}
+          />
+        ) : null;
+      })}
     </div>
   );
 }

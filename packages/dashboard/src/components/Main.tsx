@@ -1,10 +1,13 @@
 "use client";
 import { useAccount } from "wagmi";
 import CheckOwnership from "@/components/CheckOwnership";
-import CheckHolding from "@/components/CheckHolding";
-import CheckScore from "@/components/CheckScore";
+import DisplayTokens from "@/components/DisplayTokens";
 import Faq from "@/components/Faq";
 import WalletButton from "@/components/WalletButton";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import TotalScore from "@/components/TotalScore";
+import { Score } from "@/types";
 
 interface MainProps {
   className?: string;
@@ -12,16 +15,34 @@ interface MainProps {
 
 export default function Main({ className }: MainProps) {
   const { isConnected, address } = useAccount();
+  const [score, setScore] = useState<Score>();
+
+  useEffect(() => {
+    async function fetchScore() {
+      try {
+        const response = await axios.post(
+          `${process.env.NEXT_PUBLIC_API_URL}${address}`,
+        );
+        const score = response.data.score;
+        setScore(score);
+      } catch (error) {
+        console.error("Error fetching score:", error);
+      }
+    }
+
+    fetchScore();
+  }, [address]);
+
   return (
     <main
       className={`flex flex-col gap-8 row-start-2 items-center sm:items-start ${className}`}
     >
-      {isConnected && address ? (
+      {isConnected && address && score ? (
         <div className="min-h-screen flex flex-col gap-8 row-start-2 items-center sm:items-start">
           <WalletButton />
           <CheckOwnership address={address} />
-          <CheckScore address={address} />
-          <CheckHolding address={address} />
+          <DisplayTokens address={address} score={score} />
+          <TotalScore score={score} />
         </div>
       ) : (
         <WalletButton />
