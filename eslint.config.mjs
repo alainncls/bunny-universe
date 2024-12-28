@@ -12,7 +12,11 @@ const compat = new FlatCompat({
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
-    ignores: ["packages/subgraph/generated/", "packages/dashboard/.next/"],
+    ignores: [
+      "packages/subgraph/generated/",
+      "packages/dashboard/.next/",
+      "packages/functions/.netlify/",
+    ],
   },
 ];
 

@@ -1,198 +1,198 @@
 type AffiliateSell @entity(immutable: true) {
-    id: Bytes!
-    affiliate: Bytes! # address
-    blockNumber: BigInt!
-    blockTimestamp: BigInt!
-    transactionHash: Bytes!
+  id: Bytes!
+  affiliate: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
 }
 
 type Approval @entity(immutable: true) {
-    id: Bytes!
-    owner: Bytes! # address
-    approved: Bytes! # address
-    tokenId: BigInt! # uint256
-    blockNumber: BigInt!
-    blockTimestamp: BigInt!
-    transactionHash: Bytes!
+  id: Bytes!
+  owner: Bytes! # address
+  approved: Bytes! # address
+  tokenId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
 }
 
 type ApprovalForAll @entity(immutable: true) {
-    id: Bytes!
-    owner: Bytes! # address
-    operator: Bytes! # address
-    approved: Boolean! # bool
-    blockNumber: BigInt!
-    blockTimestamp: BigInt!
-    transactionHash: Bytes!
+  id: Bytes!
+  owner: Bytes! # address
+  operator: Bytes! # address
+  approved: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
 }
 
 type BatchMetadataUpdate @entity(immutable: true) {
-    id: Bytes!
-    fromTokenId: BigInt! # uint256
-    toTokenId: BigInt! # uint256
-    blockNumber: BigInt!
-    blockTimestamp: BigInt!
-    transactionHash: Bytes!
+  id: Bytes!
+  fromTokenId: BigInt! # uint256
+  toTokenId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
 }
 
 type ConsecutiveTransfer @entity(immutable: true) {
-    id: Bytes!
-    fromTokenId: BigInt! # uint256
-    toTokenId: BigInt! # uint256
-    from: Bytes! # address
-    to: Bytes! # address
-    blockNumber: BigInt!
-    blockTimestamp: BigInt!
-    transactionHash: Bytes!
+  id: Bytes!
+  fromTokenId: BigInt! # uint256
+  toTokenId: BigInt! # uint256
+  from: Bytes! # address
+  to: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
 }
 
 type ContractURIUpdated @entity(immutable: true) {
-    id: Bytes!
+  id: Bytes!
 
-    blockNumber: BigInt!
-    blockTimestamp: BigInt!
-    transactionHash: Bytes!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
 }
 
 type DefaultRoyaltySet @entity(immutable: true) {
-    id: Bytes!
-    receiver: Bytes! # address
-    feeNumerator: BigInt! # uint96
-    blockNumber: BigInt!
-    blockTimestamp: BigInt!
-    transactionHash: Bytes!
+  id: Bytes!
+  receiver: Bytes! # address
+  feeNumerator: BigInt! # uint96
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
 }
 
 type Token @entity {
-    id: String! # Stringified on-chain token ID
-    owner: Bytes! # Address of the owner
-    ownedSince: BigInt! # Timestamp of ownership
+  id: String! # Stringified on-chain token ID
+  owner: Bytes! # Address of the owner
+  ownedSince: BigInt! # Timestamp of ownership
 }
 
 type Holder @entity {
-    id: Bytes! # Address of the holder
-    balance: Int! # Number of tokens held
-    tokens: [Token!]! # List of token owned
+  id: Bytes! # Address of the holder
+  balance: Int! # Number of tokens held
+  tokens: [Token!]! # List of token owned
 }
 
 type ImmutableTrait @entity(immutable: true) {
-    id: Bytes!
-    traitKey: Bytes! # bytes32
-    tokenId: BigInt! # uint256
-    value: Bytes! # bytes32
-    blockNumber: BigInt!
-    blockTimestamp: BigInt!
-    transactionHash: Bytes!
+  id: Bytes!
+  traitKey: Bytes! # bytes32
+  tokenId: BigInt! # uint256
+  value: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
 }
 
 type Locked @entity(immutable: true) {
-    id: Bytes!
-    tokenId: BigInt! # uint256
-    blockNumber: BigInt!
-    blockTimestamp: BigInt!
-    transactionHash: Bytes!
+  id: Bytes!
+  tokenId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
 }
 
 type OwnershipTransferred @entity(immutable: true) {
-    id: Bytes!
-    previousOwner: Bytes! # address
-    newOwner: Bytes! # address
-    blockNumber: BigInt!
-    blockTimestamp: BigInt!
-    transactionHash: Bytes!
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
 }
 
 type TraitMetadataURIUpdated @entity(immutable: true) {
-    id: Bytes!
+  id: Bytes!
 
-    blockNumber: BigInt!
-    blockTimestamp: BigInt!
-    transactionHash: Bytes!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
 }
 
 type TraitUpdated @entity(immutable: true) {
-    id: Bytes!
-    traitKey: Bytes! # bytes32
-    tokenId: BigInt! # uint256
-    traitValue: Bytes! # bytes32
-    blockNumber: BigInt!
-    blockTimestamp: BigInt!
-    transactionHash: Bytes!
+  id: Bytes!
+  traitKey: Bytes! # bytes32
+  tokenId: BigInt! # uint256
+  traitValue: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
 }
 
 type TraitUpdatedList @entity(immutable: true) {
-    id: Bytes!
-    traitKey: Bytes! # bytes32
-    tokenIds: [BigInt!]! # uint256[]
-    blockNumber: BigInt!
-    blockTimestamp: BigInt!
-    transactionHash: Bytes!
+  id: Bytes!
+  traitKey: Bytes! # bytes32
+  tokenIds: [BigInt!]! # uint256[]
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
 }
 
 type TraitUpdatedListUniformValue @entity(immutable: true) {
-    id: Bytes!
-    traitKey: Bytes! # bytes32
-    tokenIds: [BigInt!]! # uint256[]
-    traitValue: Bytes! # bytes32
-    blockNumber: BigInt!
-    blockTimestamp: BigInt!
-    transactionHash: Bytes!
+  id: Bytes!
+  traitKey: Bytes! # bytes32
+  tokenIds: [BigInt!]! # uint256[]
+  traitValue: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
 }
 
 type TraitUpdatedRange @entity(immutable: true) {
-    id: Bytes!
-    traitKey: Bytes! # bytes32
-    fromTokenId: BigInt! # uint256
-    toTokenId: BigInt! # uint256
-    blockNumber: BigInt!
-    blockTimestamp: BigInt!
-    transactionHash: Bytes!
+  id: Bytes!
+  traitKey: Bytes! # bytes32
+  fromTokenId: BigInt! # uint256
+  toTokenId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
 }
 
 type TraitUpdatedRangeUniformValue @entity(immutable: true) {
-    id: Bytes!
-    traitKey: Bytes! # bytes32
-    fromTokenId: BigInt! # uint256
-    toTokenId: BigInt! # uint256
-    traitValue: Bytes! # bytes32
-    blockNumber: BigInt!
-    blockTimestamp: BigInt!
-    transactionHash: Bytes!
+  id: Bytes!
+  traitKey: Bytes! # bytes32
+  fromTokenId: BigInt! # uint256
+  toTokenId: BigInt! # uint256
+  traitValue: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
 }
 
 type Transfer @entity(immutable: true) {
-    id: Bytes!
-    from: Bytes! # address
-    to: Bytes! # address
-    tokenId: BigInt! # uint256
-    blockNumber: BigInt!
-    blockTimestamp: BigInt!
-    transactionHash: Bytes!
+  id: Bytes!
+  from: Bytes! # address
+  to: Bytes! # address
+  tokenId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
 }
 
 type TransferValidatorUpdated @entity(immutable: true) {
-    id: Bytes!
-    oldValidator: Bytes! # address
-    newValidator: Bytes! # address
-    blockNumber: BigInt!
-    blockTimestamp: BigInt!
-    transactionHash: Bytes!
+  id: Bytes!
+  oldValidator: Bytes! # address
+  newValidator: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
 }
 
 type Unlocked @entity(immutable: true) {
-    id: Bytes!
-    tokenId: BigInt! # uint256
-    blockNumber: BigInt!
-    blockTimestamp: BigInt!
-    transactionHash: Bytes!
+  id: Bytes!
+  tokenId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
 }
 
 type UpdateUser @entity(immutable: true) {
-    id: Bytes!
-    tokenId: BigInt! # uint256
-    user: Bytes! # address
-    expires: BigInt! # uint64
-    blockNumber: BigInt!
-    blockTimestamp: BigInt!
-    transactionHash: Bytes!
+  id: Bytes!
+  tokenId: BigInt! # uint256
+  user: Bytes! # address
+  expires: BigInt! # uint64
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
 }
