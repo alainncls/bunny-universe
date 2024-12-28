@@ -1,7 +1,9 @@
 import { Address } from "viem";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { formatDistance } from "date-fns";
 import { Token } from "@/types";
+import NftCard from "@/components/NftCard";
 
 type CheckHoldingProps = {
   address: Address;
@@ -40,22 +42,25 @@ export default function CheckHolding({ address }: CheckHoldingProps) {
     fetchTokens();
   }, [address]);
 
+  const gridClasses =
+    tokensHeld && tokensHeld.length < 3
+      ? "flex flex-wrap justify-center items-center gap-4"
+      : "grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-4";
+
   return (
-    <ul key={"ul"}>
+    <div className={gridClasses}>
       {tokensHeld?.map((token) => (
-        <li key={token.id}>
-          #
-          <a
-            href={`https://element.market/assets/linea/0x2375f81ccd6665ab606239e6602dbb601d35ec77/${token.id}`}
-            target={"_blank"}
-            rel={"noopener noreferrer"}
-            className={"underline"}
-          >
-            {token.id}
-          </a>{" "}
-          since {new Date(parseInt(token.ownedSince) * 1000).toUTCString()}
-        </li>
+        <NftCard
+          key={token.id}
+          tokenId={token.id}
+          imageUrl={`https://nftstorage.link/ipfs/QmPt2vS2bsz5JoRHNh6P8VK93Jzfi9XPpP7JjBzPd8Hnod/${token.id}.png`}
+          ownedSince={formatDistance(
+            new Date(parseInt(token.ownedSince) * 1000),
+            new Date(),
+            { addSuffix: true },
+          )}
+        />
       ))}
-    </ul>
+    </div>
   );
 }

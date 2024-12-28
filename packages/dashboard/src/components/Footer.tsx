@@ -1,5 +1,4 @@
 import Image from "next/image";
-import "./Footer.css";
 
 interface FooterProps {
   className?: string;

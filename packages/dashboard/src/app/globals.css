@@ -12,3 +12,7 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.svg-white {
+  filter: invert(100%);
+}

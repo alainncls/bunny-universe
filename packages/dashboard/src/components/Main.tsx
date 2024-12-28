@@ -2,9 +2,9 @@
 import { useAccount } from "wagmi";
 import CheckOwnership from "@/components/CheckOwnership";
 import CheckHolding from "@/components/CheckHolding";
-import CheckScore from "./CheckScore";
+import CheckScore from "@/components/CheckScore";
 import Faq from "@/components/Faq";
-import { WalletButton } from "@/components/WalletButton";
+import WalletButton from "@/components/WalletButton";
 
 interface MainProps {
   className?: string;

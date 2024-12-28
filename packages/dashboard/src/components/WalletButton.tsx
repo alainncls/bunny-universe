@@ -1,5 +1,5 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
-export const WalletButton = () => {
+export default function WalletButton() {
   return <ConnectButton showBalance={false} chainStatus={"none"} />;
-};
+}
