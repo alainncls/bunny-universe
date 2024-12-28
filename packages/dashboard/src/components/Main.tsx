@@ -41,8 +41,8 @@ export default function Main({ className }: MainProps) {
         <div className="min-h-screen flex flex-col gap-8 row-start-2 items-center sm:items-start">
           <WalletButton />
           <CheckOwnership address={address} />
-          <DisplayTokens address={address} score={score} />
           <TotalScore score={score} />
+          <DisplayTokens address={address} score={score} />
         </div>
       ) : (
         <WalletButton />
