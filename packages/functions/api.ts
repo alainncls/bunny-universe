@@ -8,23 +8,24 @@ import {
 } from "viem";
 import { config } from "dotenv";
 import { linea } from "viem/chains";
-import { Token } from "../dashboard/src/types";
-import { BunnyUniverseContract } from "../dashboard/src/utils/constants";
+import { Score, Token, TokenScore } from "../dashboard/src/types";
+import {
+  BunnyUniverseContract,
+  COLLECTOR_TIER_1_MULTIPLIER,
+  COLLECTOR_TIER_2_MULTIPLIER,
+  COLLECTOR_TIER_3_MULTIPLIER,
+  COLLECTOR_TIER_4_MULTIPLIER,
+  COLLECTOR_TIER_5_MULTIPLIER,
+  DAILY_POINTS,
+  EARLY_HOLDER_MULTIPLIER,
+  MINTING_DAY,
+  MONTHLY_BONUS,
+  QUARTERLY_BONUS,
+  SEMESTER_BONUS,
+  WEEKLY_MULTIPLIER,
+} from "../dashboard/src/utils/constants";
 
 config({ path: ".env" });
-
-const DAILY_POINTS = 1250;
-const WEEKLY_MULTIPLIER = 1.5;
-const EARLY_HOLDER_MULTIPLIER = 1.1;
-const COLLECTOR_TIER_1_MULTIPLIER = 1;
-const COLLECTOR_TIER_2_MULTIPLIER = 1.2;
-const COLLECTOR_TIER_3_MULTIPLIER = 1.4;
-const COLLECTOR_TIER_4_MULTIPLIER = 1.6;
-const COLLECTOR_TIER_5_MULTIPLIER = 2;
-const MINTING_DAY = 1734825599;
-const MONTHLY_BONUS = 5000;
-const QUARTERLY_BONUS = 20000;
-const SEMESTER_BONUS = 50000;
 
 const { NEXT_PUBLIC_INFURA_ID } = process.env;
 
@@ -132,45 +133,67 @@ const computeEarlyHolder = (ownedSince: string): boolean => {
   return ownedSinceTimestamp < MINTING_DAY;
 };
 
-const computeScore = (tokensOwned: Token[]): number => {
-  const scores = [];
+const computeScore = (token: Token): TokenScore => {
+  let score = 0;
+  const { days, weeks, months, quarters, semesters } = computePeriods(
+    token.ownedSince,
+  );
 
-  for (const token of tokensOwned) {
-    let score = 0;
-    const { days, weeks, months, quarters, semesters } = computePeriods(
-      token.ownedSince,
-    );
+  // Daily Point Distribution
+  score += DAILY_POINTS * days;
 
-    // Daily Point Distribution
-    score += DAILY_POINTS * days;
-
-    // Weekly Snapshot Bonus
-    if (weeks > 0) {
-      score *= WEEKLY_MULTIPLIER * weeks;
-    }
-
-    // Early Holder Bonus
-    const isEarlyHolder = computeEarlyHolder(token.ownedSince);
-    if (isEarlyHolder) {
-      score *= EARLY_HOLDER_MULTIPLIER;
-    }
-
-    // Collection Size Multiplier
-    score *= computeCollectorTierMultiplier(tokensOwned.length);
-
-    // Monthly Bonus
-    score += MONTHLY_BONUS * months;
-
-    // Quarterly Bonus
-    score += QUARTERLY_BONUS * quarters;
-
-    // Semester Bonus
-    score += SEMESTER_BONUS * semesters;
-
-    scores.push(score);
+  // Weekly Snapshot Bonus
+  if (weeks > 0) {
+    score *= WEEKLY_MULTIPLIER * weeks;
   }
 
-  return Math.floor(scores.reduce((a, b) => a + b, 0));
+  // Early Holder Bonus
+  const isEarlyHolder = computeEarlyHolder(token.ownedSince);
+  if (isEarlyHolder) {
+    score *= EARLY_HOLDER_MULTIPLIER;
+  }
+
+  // Monthly Bonus
+  score += MONTHLY_BONUS * months;
+
+  // Quarterly Bonus
+  score += QUARTERLY_BONUS * quarters;
+
+  // Semester Bonus
+  score += SEMESTER_BONUS * semesters;
+
+  return {
+    tokenId: token.id,
+    score: Math.floor(score),
+    days,
+    weeks,
+    months,
+    quarters,
+    semesters,
+    earlyHolder: isEarlyHolder,
+  };
+};
+
+const computeTotalScore = (tokensOwned: Token[]): Score => {
+  const scores: TokenScore[] = [];
+
+  for (const token of tokensOwned) {
+    scores.push(computeScore(token));
+  }
+
+  let totalScore = Math.floor(scores.reduce((a, b) => a + b.score, 0));
+
+  // Collection Size Multiplier
+  const collectorTierMultiplier = computeCollectorTierMultiplier(
+    tokensOwned.length,
+  );
+  totalScore *= collectorTierMultiplier;
+
+  return {
+    total: Math.floor(totalScore),
+    tokens: scores,
+    collectorTierMultiplier,
+  };
 };
 
 export async function handler(event: {
@@ -194,7 +217,7 @@ export async function handler(event: {
     const tokensOwned = await getTokensOwned(address);
     checkTokensOwned(tokensOwned, tokenNumber);
 
-    const score = computeScore(tokensOwned);
+    const score = computeTotalScore(tokensOwned);
 
     return {
       statusCode: 200,
