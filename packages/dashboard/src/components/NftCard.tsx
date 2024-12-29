@@ -3,12 +3,7 @@
 import { Card } from "flowbite-react";
 import Image from "next/image";
 import { TokenScore } from "@/types";
-import {
-  DAILY_POINTS,
-  MONTHLY_BONUS,
-  QUARTERLY_BONUS,
-  SEMESTER_BONUS,
-} from "@/utils/constants";
+import { DAILY_POINTS, MONTHLY_BONUS } from "@/utils/constants";
 
 type NftCardProps = {
   tokenId: string;
@@ -78,18 +73,6 @@ export default function NftCard({
             Monthly bonus {MONTHLY_BONUS}
           </span>
           {score.months > 0 ? "✅" : "❌"}
-        </li>
-        <li className="flex items-center justify-between">
-          <span className="text-gray-700 dark:text-gray-400">
-            3 months bonus {QUARTERLY_BONUS}
-          </span>
-          {score.quarters > 0 ? "✅" : "❌"}
-        </li>
-        <li className="flex items-center justify-between">
-          <span className="text-gray-700 dark:text-gray-400">
-            6 months bonus {SEMESTER_BONUS}
-          </span>
-          {score.semesters > 0 ? "✅" : "❌"}
         </li>
       </ul>
     </Card>
