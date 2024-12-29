@@ -1,6 +1,7 @@
 import axios from "axios";
 import {
   createPublicClient,
+  erc20Abi,
   erc721Abi,
   getAddress,
   http,
@@ -18,10 +19,11 @@ import {
   COLLECTOR_TIER_5_MULTIPLIER,
   DAILY_POINTS,
   EARLY_HOLDER_MULTIPLIER,
+  LXP_MULTIPLIER,
+  LXP_THRESHOLD,
+  LxpContract,
   MINTING_DAY,
   MONTHLY_BONUS,
-  QUARTERLY_BONUS,
-  SEMESTER_BONUS,
   WEEKLY_MULTIPLIER,
 } from "../dashboard/src/utils/constants";
 
@@ -48,23 +50,40 @@ const checkAddress = (address: string) => {
   }
 };
 
-const getTokenNumber = async (address: string) => {
+const getTokenBalances = async (address: string) => {
   const publicClient = createPublicClient({
     chain: linea,
     transport: http(
       `https://linea-mainnet.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`,
     ),
+    batch: {
+      multicall: {
+        wait: 10,
+      },
+    },
   });
 
   const addr = getAddress(address);
 
-  const balance = await publicClient.readContract({
-    abi: erc721Abi,
-    address: BunnyUniverseContract,
-    functionName: "balanceOf",
-    args: [addr],
-  });
-  return Number(balance);
+  const [rawBunniesBalance, rawLxpBalance] = await Promise.all([
+    publicClient.readContract({
+      abi: erc721Abi,
+      address: BunnyUniverseContract,
+      functionName: "balanceOf",
+      args: [addr],
+    }),
+    publicClient.readContract({
+      abi: erc20Abi,
+      address: LxpContract,
+      functionName: "balanceOf",
+      args: [addr],
+    }),
+  ]);
+
+  return {
+    bunniesBalance: Number(rawBunniesBalance),
+    lxpBalance: Number(rawLxpBalance),
+  };
 };
 
 const checkTokenNumber = (tokenNumber: number) => {
@@ -108,10 +127,8 @@ const computePeriods = (ownedSinceString: string) => {
   const days = Math.floor(holdingPeriod / (24 * 60 * 60));
   const weeks = Math.floor(days / 7);
   const months = Math.floor(days / 30);
-  const quarters = Math.floor(months / 3);
-  const semesters = Math.floor(months / 6);
 
-  return { days, weeks, months, quarters, semesters };
+  return { days, weeks, months };
 };
 
 const computeCollectorTierMultiplier = (tokensCount: number): number => {
@@ -135,9 +152,7 @@ const computeEarlyHolder = (ownedSince: string): boolean => {
 
 const computeScore = (token: Token): TokenScore => {
   let score = 0;
-  const { days, weeks, months, quarters, semesters } = computePeriods(
-    token.ownedSince,
-  );
+  const { days, weeks, months } = computePeriods(token.ownedSince);
 
   // Daily Point Distribution
   score += DAILY_POINTS * days;
@@ -156,26 +171,19 @@ const computeScore = (token: Token): TokenScore => {
   // Monthly Bonus
   score += MONTHLY_BONUS * months;
 
-  // Quarterly Bonus
-  score += QUARTERLY_BONUS * quarters;
-
-  // Semester Bonus
-  score += SEMESTER_BONUS * semesters;
-
   return {
     tokenId: token.id,
     score: Math.floor(score),
     days,
     weeks,
     months,
-    quarters,
-    semesters,
     earlyHolder: isEarlyHolder,
   };
 };
 
-const computeTotalScore = (tokensOwned: Token[]): Score => {
+const computeTotalScore = (tokensOwned: Token[], lxpOwned: number): Score => {
   const scores: TokenScore[] = [];
+  let isLxpWhale = false;
 
   for (const token of tokensOwned) {
     scores.push(computeScore(token));
@@ -189,10 +197,17 @@ const computeTotalScore = (tokensOwned: Token[]): Score => {
   );
   totalScore *= collectorTierMultiplier;
 
+  // LXP Holder Multiplier
+  if (lxpOwned > LXP_THRESHOLD) {
+    totalScore *= LXP_MULTIPLIER;
+    isLxpWhale = true;
+  }
+
   return {
     total: Math.floor(totalScore),
     tokens: scores,
     collectorTierMultiplier,
+    isLxpWhale,
   };
 };
 
@@ -211,13 +226,13 @@ export async function handler(event: {
     const { address } = event.queryStringParameters;
     checkAddress(address);
 
-    const tokenNumber = await getTokenNumber(address);
-    checkTokenNumber(tokenNumber);
+    const { bunniesBalance, lxpBalance } = await getTokenBalances(address);
+    checkTokenNumber(bunniesBalance);
 
     const tokensOwned = await getTokensOwned(address);
-    checkTokensOwned(tokensOwned, tokenNumber);
+    checkTokensOwned(tokensOwned, bunniesBalance);
 
-    const score = computeTotalScore(tokensOwned);
+    const score = computeTotalScore(tokensOwned, lxpBalance);
 
     return {
       statusCode: 200,
