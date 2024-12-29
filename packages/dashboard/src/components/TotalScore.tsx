@@ -4,6 +4,8 @@ import {
   COLLECTOR_TIER_3_MULTIPLIER,
   COLLECTOR_TIER_4_MULTIPLIER,
   COLLECTOR_TIER_5_MULTIPLIER,
+  LXP_MULTIPLIER,
+  LXP_THRESHOLD,
 } from "@/utils/constants";
 import { Card } from "flowbite-react";
 
@@ -61,6 +63,12 @@ export default function TotalScore({ score }: TotalScoreProps) {
                 10+ NFTs: {COLLECTOR_TIER_5_MULTIPLIER}x points
               </span>
               {tokenNumber >= 10 ? "✅" : "❌"}
+            </li>
+            <li className="flex items-center justify-between">
+              <span className="text-gray-700 dark:text-gray-400">
+                LXP {`>`} {LXP_THRESHOLD}: {LXP_MULTIPLIER}x points
+              </span>
+              {score.isLxpWhale ? "🐳" : "❌"}
             </li>
           </ul>
         </div>

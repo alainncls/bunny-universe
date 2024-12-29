@@ -10,8 +10,6 @@ export type TokenScore = {
   days: number;
   weeks: number;
   months: number;
-  quarters: number;
-  semesters: number;
   earlyHolder: boolean;
 };
 
@@ -19,4 +17,5 @@ export type Score = {
   total: number;
   tokens: TokenScore[];
   collectorTierMultiplier: number;
+  isLxpWhale: boolean;
 };
