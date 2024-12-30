@@ -55,12 +55,12 @@ export default function NftCard({
         You got this bunny {ownedSince}.
       </p>
       <h6 className="text-l font-bold text-gray-900 dark:text-white">
-        {score.score} $CARROT points
+        {score.score.toLocaleString("en-US")} $CARROT points
       </h6>
       <ul className="font-normal text-gray-700 dark:text-gray-400">
         <li className="flex items-center justify-between">
           <span className="text-gray-700 dark:text-gray-400">
-            Daily {DAILY_POINTS} points
+            Daily {DAILY_POINTS.toLocaleString("en-US")} points
           </span>
           {score.days > 0 ? "✅" : "❌"}
         </li>
@@ -78,7 +78,7 @@ export default function NftCard({
         </li>
         <li className="flex items-center justify-between">
           <span className="text-gray-700 dark:text-gray-400">
-            Monthly bonus {MONTHLY_BONUS}
+            Monthly bonus {MONTHLY_BONUS.toLocaleString("en-US")}
           </span>
           {score.months > 0 ? "✅" : "❌"}
         </li>
