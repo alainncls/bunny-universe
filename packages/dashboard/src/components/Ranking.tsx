@@ -1,8 +1,9 @@
 import { Score } from "@/types";
-import { Card } from "flowbite-react";
+import { Card, Tooltip } from "flowbite-react";
 import EnsResolution from "@/components/EnsResolution";
 import { getAddress } from "viem";
 import Image from "next/image";
+import { formatDistance } from "date-fns";
 
 type RankingProps = {
   score: Score;
@@ -48,8 +49,25 @@ export default function Ranking({ score }: RankingProps) {
 
   return (
     <>
-      <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-gray-200">
+      <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-gray-200 flex items-center justify-center space-x-2">
         Ranking
+        {score.lastUpdate && (
+          <Tooltip
+            content={`Last updated ${formatDistance(
+              new Date(score.lastUpdate),
+              new Date(),
+              { addSuffix: true },
+            )}`}
+          >
+            <Image
+              src={"/icons/info.svg"}
+              alt={"Information icon"}
+              width={16}
+              height={16}
+              className={"svg-grey ml-1"}
+            />
+          </Tooltip>
+        )}
       </h2>
       <p className="text-lg text-center text-gray-500 dark:text-gray-400 mb-4">
         🏅 How high can you hop?
