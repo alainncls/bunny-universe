@@ -22,7 +22,15 @@ export default function NftCard({
     <Card
       className="max-w-sm"
       renderImage={() => (
-        <Image width={270} height={270} src={imageUrl} alt="NFT Image" />
+        <div className="w-full aspect-w-1 aspect-h-1">
+          <Image
+            src={imageUrl}
+            alt="NFT Image"
+            layout="responsive"
+            width={270}
+            height={270}
+          />
+        </div>
       )}
     >
       <div className="flex justify-between items-center">
