@@ -20,9 +20,11 @@ export type Score = {
   isLxpWhale: boolean;
   rank?: number;
   top10?: ScoreEntity[];
+  lastUpdate?: Date;
 };
 
 export type ScoreEntity = Score & {
   holder: string;
   rank: number;
+  lastUpdate?: Date;
 };

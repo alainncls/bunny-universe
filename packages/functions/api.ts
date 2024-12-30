@@ -87,6 +87,7 @@ const getRanks = async (address: string) => {
 
   let rankResult: ScoreEntity | null = null;
   let top10Results: ScoreEntity[] = [];
+  let lastUpdateResult: ScoreEntity | null = null;
 
   try {
     await client.connect();
@@ -99,13 +100,21 @@ const getRanks = async (address: string) => {
       .collection(DB_COLLECTION!)
       .find<ScoreEntity>({}, { sort: { total: -1 }, limit: 10 })
       .toArray();
+    lastUpdateResult = await client
+      .db(DB_NAME)
+      .collection(DB_COLLECTION!)
+      .findOne<ScoreEntity>({ lastUpdate: { $ne: null } });
   } catch (error) {
     console.error("Error fetching ranks", error);
   } finally {
     await client.close();
   }
 
-  return { rank: rankResult?.rank, top10: top10Results };
+  return {
+    rank: rankResult?.rank,
+    top10: top10Results,
+    lastUpdate: lastUpdateResult?.lastUpdate,
+  };
 };
 
 export async function handler(event: {
@@ -130,12 +139,12 @@ export async function handler(event: {
 
       const score = computeTotalScore(tokensOwned, lxpBalance);
 
-      const { rank, top10 } = await getRanks(address);
+      const { rank, top10, lastUpdate } = await getRanks(address);
 
       return {
         statusCode: 200,
         headers,
-        body: JSON.stringify({ score: { ...score, rank, top10 } }),
+        body: JSON.stringify({ score: { ...score, rank, top10, lastUpdate } }),
       };
     } catch (error: unknown) {
       const errorMessage =

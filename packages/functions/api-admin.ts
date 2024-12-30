@@ -166,6 +166,13 @@ export async function handler(event: {
         .collection(DB_COLLECTION!)
         .insertMany(scoresArray);
       logWithTime("Saved new scores");
+
+      // Insert last update
+      await client
+        .db(DB_NAME)
+        .collection(DB_COLLECTION!)
+        .insertOne({ lastUpdate: new Date() });
+      logWithTime("Inserted last update");
     } catch (error: unknown) {
       const errorMessage =
         error instanceof Error ? error.message : "An unknown error occurred";
