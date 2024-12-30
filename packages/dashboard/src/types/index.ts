@@ -19,3 +19,8 @@ export type Score = {
   collectorTierMultiplier: number;
   isLxpWhale: boolean;
 };
+
+export type ScoreEntity = Score & {
+  holder: string;
+  rank: number;
+};
