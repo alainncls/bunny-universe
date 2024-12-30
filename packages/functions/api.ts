@@ -1,12 +1,20 @@
 import axios from "axios";
 import { isAddress } from "viem";
 import { config } from "dotenv";
-import { Token } from "../dashboard/src/types";
+import { ScoreEntity, Token } from "../dashboard/src/types";
 import { computeTotalScore, getTokenBalances } from "./score";
+import { MongoClient, ServerApiVersion } from "mongodb";
 
 config({ path: ".env" });
 
-const { NEXT_PUBLIC_INFURA_ID } = process.env;
+const {
+  NEXT_PUBLIC_INFURA_ID,
+  DB_USER,
+  DB_PASSWORD,
+  DB_URL,
+  DB_NAME,
+  DB_COLLECTION,
+} = process.env;
 
 const headers = {
   "Access-Control-Allow-Origin": "*",
@@ -16,7 +24,14 @@ const headers = {
 };
 
 const checkConfig = () => {
-  if (!NEXT_PUBLIC_INFURA_ID) {
+  if (
+    !NEXT_PUBLIC_INFURA_ID ||
+    !DB_USER ||
+    !DB_PASSWORD ||
+    !DB_URL ||
+    !DB_NAME ||
+    !DB_COLLECTION
+  ) {
     throw new Error("Configuration not set");
   }
 };
@@ -60,6 +75,39 @@ const checkTokensOwned = (tokensOwned: Token[], tokenNumber: number) => {
   }
 };
 
+const getRanks = async (address: string) => {
+  const dbUri = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@${DB_URL}`;
+  const client = new MongoClient(dbUri, {
+    serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
+    },
+  });
+
+  let rankResult: ScoreEntity | null = null;
+  let top10Results: ScoreEntity[] = [];
+
+  try {
+    await client.connect();
+    rankResult = await client
+      .db(DB_NAME)
+      .collection(DB_COLLECTION!)
+      .findOne<ScoreEntity>({ holder: address.toLowerCase() });
+    top10Results = await client
+      .db(DB_NAME)
+      .collection(DB_COLLECTION!)
+      .find<ScoreEntity>({}, { sort: { total: -1 }, limit: 10 })
+      .toArray();
+  } catch (error) {
+    console.error("Error fetching ranks", error);
+  } finally {
+    await client.close();
+  }
+
+  return { rank: rankResult?.rank, top10: top10Results };
+};
+
 export async function handler(event: {
   queryStringParameters: { address: string };
   body: string;
@@ -82,10 +130,12 @@ export async function handler(event: {
 
       const score = computeTotalScore(tokensOwned, lxpBalance);
 
+      const { rank, top10 } = await getRanks(address);
+
       return {
         statusCode: 200,
         headers,
-        body: JSON.stringify({ score }),
+        body: JSON.stringify({ score: { ...score, rank, top10 } }),
       };
     } catch (error: unknown) {
       const errorMessage =

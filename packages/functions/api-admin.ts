@@ -143,7 +143,6 @@ export async function handler(event: {
       const scoresArray: ScoreEntity[] = Object.entries(scores)
         .map(([holder, score]) => ({
           holder,
-          rank: 0,
           ...score,
         }))
         .sort((a, b) => b.total - a.total)

@@ -18,6 +18,8 @@ export type Score = {
   tokens: TokenScore[];
   collectorTierMultiplier: number;
   isLxpWhale: boolean;
+  rank?: number;
+  top10?: ScoreEntity[];
 };
 
 export type ScoreEntity = Score & {
