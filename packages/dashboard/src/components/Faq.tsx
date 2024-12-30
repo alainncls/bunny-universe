@@ -50,7 +50,7 @@ export default function Faq() {
             <p className="text-gray-500 dark:text-gray-400">
               Check out the&nbsp;
               <a
-                href="https://mirror.xyz/mainedge.eth/mv9AzYMrzNEqT9UqHuAkpDG8wfuzazhkDLZ8Ha4j4tk"
+                href="https://mirror.xyz/bunnyuniverse.eth/NsjwLQL2wgo2kQYV31l2777amcJ55AKxKuiQDh8Yj6k"
                 rel="nofollow noopener"
                 className="text-cyan-600 hover:underline dark:text-cyan-500"
               >

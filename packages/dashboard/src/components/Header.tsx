@@ -38,7 +38,7 @@ export default function Header() {
         </div>
         <NavbarCollapse>
           <NavbarLink
-            href="https://mirror.xyz/mainedge.eth/mv9AzYMrzNEqT9UqHuAkpDG8wfuzazhkDLZ8Ha4j4tk"
+            href="https://mirror.xyz/bunnyuniverse.eth/NsjwLQL2wgo2kQYV31l2777amcJ55AKxKuiQDh8Yj6k"
             target="_blank"
             rel="noopener nofollow"
           >
