@@ -137,7 +137,6 @@ export async function handler(event: {
 
       // Compute all scores
       const scores = await processHolders(holders, logWithTime);
-      logWithTime(`${scores.length} computed`);
 
       // Convert scores to array and compute ranking for each holder
       const scoresArray: ScoreEntity[] = Object.entries(scores)
