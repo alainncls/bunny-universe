@@ -20,7 +20,7 @@ export default function Main({ className }: MainProps) {
   useEffect(() => {
     async function fetchScore() {
       try {
-        const response = await axios.post(
+        const response = await axios.get(
           `${process.env.NEXT_PUBLIC_API_URL}${address}`,
         );
         const score = response.data.score;
@@ -35,10 +35,10 @@ export default function Main({ className }: MainProps) {
 
   return (
     <main
-      className={`flex flex-col gap-8 row-start-2 items-center sm:items-start ${className}`}
+      className={`flex flex-col gap-8 items-center sm:items-start ${className}`}
     >
       {isConnected && address && score ? (
-        <div className="min-h-screen flex flex-col gap-8 row-start-2 items-center sm:items-start">
+        <div className="min-h-screen flex flex-col gap-8 items-center sm:items-start">
           <WalletButton />
           <CheckOwnership address={address} />
           <TotalScore score={score} />
