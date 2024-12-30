@@ -40,7 +40,7 @@ export default function Header() {
           <NavbarLink
             href="https://mirror.xyz/bunnyuniverse.eth/NsjwLQL2wgo2kQYV31l2777amcJ55AKxKuiQDh8Yj6k"
             target="_blank"
-            rel="noopener nofollow"
+            rel="nofollow noopener"
           >
             How is the score computed?
           </NavbarLink>

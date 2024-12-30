@@ -16,3 +16,7 @@ body {
 .svg-white {
   filter: invert(100%);
 }
+
+.svg-grey {
+  filter: invert(70%);
+}
