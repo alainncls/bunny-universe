@@ -7,7 +7,7 @@ interface FooterProps {
 export default function Footer({ className }: FooterProps) {
   return (
     <footer className={className}>
-      <div className="row-span-full mt-8 mb-8 flex flex-row items-center justify-center">
+      <div className="row-span-full my-8 flex-row items-center justify-center hidden sm:flex">
         <Image
           src={"/logo.png"}
           alt={"Bunny Universe logo"}
@@ -30,6 +30,20 @@ export default function Footer({ className }: FooterProps) {
             className={"ml-1"}
           />
         </a>
+      </div>
+      <div className="row-span-full my-8 flex flex-row items-center justify-center sm:hidden text-center">
+        <span>
+          <span className="font-bold">Bunny Universe</span> is the first
+          stake-able NFT collection, proudly built on{" "}
+          <a
+            className="underline underline-offset-4"
+            href="https://linea.build"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="font-bold">Linea</span>
+          </a>
+        </span>
       </div>
       <div className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
         <a
