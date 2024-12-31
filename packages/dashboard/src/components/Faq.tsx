@@ -60,6 +60,36 @@ export default function Faq() {
             </p>
           </AccordionContent>
         </AccordionPanel>
+        <AccordionPanel>
+          <AccordionTitle>
+            If I mint a Bunny on the first day and later transfer it to another
+            wallet, or if I transfer a Bunny from another wallet to my main
+            wallet, will I still get the 10% Early Holder Bonus?
+          </AccordionTitle>
+          <AccordionContent>
+            <p className="text-gray-500 dark:text-gray-400">
+              Any action involving a&nbsp;
+              <span className={"font-bold"}>Transfer</span> (mint, transfer,
+              buy) completed&nbsp;
+              <span className={"font-bold"}>
+                before 23:59:59 UTC on the first day&nbsp;
+              </span>
+              qualifies for the “Early Holder Bonus.” To receive the bonus, the
+              NFT must remain in your wallet.
+            </p>
+          </AccordionContent>
+        </AccordionPanel>
+        <AccordionPanel>
+          <AccordionTitle>
+            Is the Monthly Bonus calculated per NFT or per wallet?
+          </AccordionTitle>
+          <AccordionContent>
+            <p className="text-gray-500 dark:text-gray-400">
+              The Monthly Bonus is calculated per NFT. For example, if you hold
+              two NFTs for 1 month, you will receive 2 x 50,000 points.
+            </p>
+          </AccordionContent>
+        </AccordionPanel>
       </Accordion>
     </>
   );
