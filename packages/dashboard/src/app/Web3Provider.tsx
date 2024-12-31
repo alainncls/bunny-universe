@@ -28,8 +28,8 @@ const config = getDefaultConfig({
 
   appName: "Bunny Universe",
   appDescription: "Bunny Universe Dashboard",
-  appUrl: "https://bunny.alainnicolas.fr",
-  appIcon: "https://bunny.alainnicolas.fr/logo.png",
+  appUrl: "https://earncarrot.bunnyuniverse.xyz",
+  appIcon: "https://earncarrot.bunnyuniverse.xyz/logo.png",
 });
 const queryClient = new QueryClient();
 
