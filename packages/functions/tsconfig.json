@@ -1,9 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": [
-      "esnext"
-    ],
+    "lib": ["esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -15,10 +13,6 @@
     "isolatedModules": true,
     "incremental": true
   },
-  "include": [
-    "**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"]
 }
