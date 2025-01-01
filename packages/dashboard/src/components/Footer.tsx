@@ -108,6 +108,21 @@ export default function Footer({ className }: FooterProps) {
         </a>
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+          href="https://github.com/alainncls/bunny-universe"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            aria-hidden
+            src="/icons/github.svg"
+            alt="Github icon"
+            width={24}
+            height={24}
+            className={"svg-white"}
+          />
+        </a>
+        <a
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
           href="https://www.bunnyuniverse.xyz/"
           target="_blank"
           rel="noopener noreferrer"
