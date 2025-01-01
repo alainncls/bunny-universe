@@ -6,8 +6,15 @@ import { computeTotalScore, getTokenBalances } from "./score";
 
 config({ path: ".env" });
 
-const { DB_USER, DB_PASSWORD, DB_URL, DB_NAME, DB_COLLECTION, BUNNY_API_KEY } =
-  process.env;
+const {
+  DB_USER,
+  DB_PASSWORD,
+  DB_URL,
+  DB_NAME,
+  DB_COLLECTION,
+  BUNNY_API_KEY,
+  NEXT_PUBLIC_THE_GRAPH_API_KEY,
+} = process.env;
 
 const headers = {
   "Access-Control-Allow-Origin": "*",
@@ -23,7 +30,8 @@ const checkConfig = () => {
     !DB_URL ||
     !DB_NAME ||
     !DB_COLLECTION ||
-    !BUNNY_API_KEY
+    !BUNNY_API_KEY ||
+    !NEXT_PUBLIC_THE_GRAPH_API_KEY
   ) {
     throw new Error("Configuration not set");
   }
@@ -31,7 +39,7 @@ const checkConfig = () => {
 
 const fetchTokens = async (skip: number) => {
   const response = await axios.post(
-    "https://api.studio.thegraph.com/query/67521/bunny-universe/version/latest",
+    `https://gateway.thegraph.com/api/${NEXT_PUBLIC_THE_GRAPH_API_KEY}/subgraphs/id/E99RzE1iK71GUk1qndxGTwZgpqYaF3boA1faZ4pCjrSw`,
     {
       query: `
             query GetTokens($skip: Int!) {

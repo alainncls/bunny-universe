@@ -17,7 +17,7 @@ export default function DisplayTokens({ address, score }: DisplayTokensProps) {
     async function fetchTokens() {
       try {
         const response = await axios.post(
-          "https://api.studio.thegraph.com/query/67521/bunny-universe/version/latest",
+          `https://gateway.thegraph.com/api/${process.env.NEXT_PUBLIC_THE_GRAPH_API_KEY}/subgraphs/id/E99RzE1iK71GUk1qndxGTwZgpqYaF3boA1faZ4pCjrSw`,
           {
             query: `
             query GetTokens($address: String!) {

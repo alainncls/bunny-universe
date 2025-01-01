@@ -14,6 +14,7 @@ const {
   DB_URL,
   DB_NAME,
   DB_COLLECTION,
+  NEXT_PUBLIC_THE_GRAPH_API_KEY,
 } = process.env;
 
 const headers = {
@@ -30,7 +31,8 @@ const checkConfig = () => {
     !DB_PASSWORD ||
     !DB_URL ||
     !DB_NAME ||
-    !DB_COLLECTION
+    !DB_COLLECTION ||
+    !NEXT_PUBLIC_THE_GRAPH_API_KEY
   ) {
     throw new Error("Configuration not set");
   }
@@ -50,7 +52,7 @@ const checkTokenNumber = (tokenNumber: number) => {
 
 const getTokensOwned = async (address: string) => {
   const response = await axios.post(
-    "https://api.studio.thegraph.com/query/67521/bunny-universe/version/latest",
+    `https://gateway.thegraph.com/api/${NEXT_PUBLIC_THE_GRAPH_API_KEY}/subgraphs/id/E99RzE1iK71GUk1qndxGTwZgpqYaF3boA1faZ4pCjrSw`,
     {
       query: `
             query GetTokens($address: String!) {
