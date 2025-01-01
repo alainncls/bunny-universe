@@ -8,7 +8,7 @@ type CheckOwnershipProps = {
 };
 
 export default function CheckOwnership({ address }: CheckOwnershipProps) {
-  const { data: balance, isLoading } = useReadContract({
+  const { data: balance } = useReadContract({
     abi: erc721Abi,
     address: BunnyUniverseContract,
     functionName: "balanceOf",
@@ -17,10 +17,6 @@ export default function CheckOwnership({ address }: CheckOwnershipProps) {
       enabled: !!address,
     },
   });
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div>
