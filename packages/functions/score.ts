@@ -16,6 +16,7 @@ import {
 } from "../dashboard/src/utils/constants";
 import { Score, Token, TokenScore } from "../dashboard/src/types";
 import {
+  Address,
   createPublicClient,
   erc20Abi,
   erc721Abi,
@@ -37,7 +38,7 @@ export const getTokenBalances = async (address: string) => {
     },
   });
 
-  const addr = getAddress(address);
+  const addr = getAddress(address.toLowerCase());
 
   const [rawBunniesBalance, rawLxpBalance] = await Promise.all([
     publicClient.readContract({
@@ -58,6 +59,58 @@ export const getTokenBalances = async (address: string) => {
     bunniesBalance: Number(rawBunniesBalance),
     lxpBalance: Number(rawLxpBalance),
   };
+};
+
+export const getMultipleTokensBalances = async (addresses: string[]) => {
+  const publicClient = createPublicClient({
+    chain: linea,
+    transport: http(
+      `https://linea-mainnet.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`,
+    ),
+    batch: {
+      multicall: {
+        wait: 100,
+      },
+    },
+  });
+
+  const addrList: Address[] = addresses.map((address) =>
+    getAddress(address.toLowerCase()),
+  );
+
+  const [rawBunniesBalances, rawLxpBalances] = await Promise.all([
+    Promise.all(
+      addrList.map((addr) =>
+        publicClient.readContract({
+          abi: erc721Abi,
+          address: BunnyUniverseContract,
+          functionName: "balanceOf",
+          args: [addr],
+        }),
+      ),
+    ),
+    Promise.all(
+      addrList.map((addr) =>
+        publicClient.readContract({
+          abi: erc20Abi,
+          address: LxpContract,
+          functionName: "balanceOf",
+          args: [addr],
+        }),
+      ),
+    ),
+  ]);
+
+  return addresses.reduce(
+    (acc, address, index) => {
+      acc[address] = {
+        bunniesBalance: Number(rawBunniesBalances[index]),
+        lxpBalance: Number(rawLxpBalances[index]),
+      };
+      return acc;
+    },
+    {} as Record<string, { bunniesBalance: number; lxpBalance: number }>,
+  );
 };
 
 const computePeriods = (ownedSinceString: string) => {

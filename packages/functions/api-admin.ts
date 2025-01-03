@@ -2,7 +2,7 @@ import { config } from "dotenv";
 import { MongoClient, ServerApiVersion } from "mongodb";
 import axios from "axios";
 import { Score, ScoreEntity, Token } from "../dashboard/src/types";
-import { computeTotalScore, getTokenBalances } from "./score";
+import { computeTotalScore, getMultipleTokensBalances } from "./score";
 
 config({ path: ".env" });
 
@@ -75,9 +75,12 @@ const processHolders = async (
 
   for (let i = 0; i < holderEntries.length; i += 100) {
     const batch = holderEntries.slice(i, i + 100);
+    const addresses = batch.map(([holder]) => holder);
+    const balances = await getMultipleTokensBalances(addresses);
+
     await Promise.all(
       batch.map(async ([holder, tokens]) => {
-        const { bunniesBalance, lxpBalance } = await getTokenBalances(holder);
+        const { bunniesBalance, lxpBalance } = balances[holder];
 
         if (bunniesBalance !== tokens.length) {
           console.error(`Token count mismatch for ${holder}`);
