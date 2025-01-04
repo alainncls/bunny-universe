@@ -34,8 +34,10 @@ export default function Main({ className }: MainProps) {
       }
     }
 
-    setIsLoading(true);
-    fetchScore();
+    if (address) {
+      setIsLoading(true);
+      fetchScore();
+    }
   }, [address]);
 
   return (
