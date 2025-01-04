@@ -1,9 +1,11 @@
+import Image from "next/image";
 import {
   Accordion,
   AccordionContent,
   AccordionPanel,
   AccordionTitle,
 } from "flowbite-react";
+import { DAILY_POINTS } from "@/utils/constants";
 
 export default function Faq() {
   return (
@@ -58,6 +60,9 @@ export default function Faq() {
               </a>
               explaining everything.
             </p>
+            <p className="text-gray-500 dark:text-gray-400">
+              Short answer: the score is computed based on the number of bunnies
+            </p>
           </AccordionContent>
         </AccordionPanel>
         <AccordionPanel>
@@ -99,6 +104,48 @@ export default function Faq() {
               If a wallet sells an NFT, the NFT is no longer included in the
               wallet’s global score. All points associated with the sold NFT,
               including those earned in the past, are removed retroactively.
+            </p>
+          </AccordionContent>
+        </AccordionPanel>
+        <AccordionPanel>
+          <AccordionTitle>When are my points updated?</AccordionTitle>
+          <AccordionContent>
+            <p className="text-gray-500 dark:text-gray-400">
+              Your points are updated in real-time. For example:
+            </p>
+            <ul className="list-disc pl-5 text-gray-500 dark:text-gray-400">
+              <li>
+                If you buy a Bunny, it will appear on your dashboard
+                immediately. However, you’ll need to wait 24 hours for it to add{" "}
+                {DAILY_POINTS.toLocaleString("en-US")} points to your score.
+              </li>
+              <li>
+                If you already have one Bunny, acquiring a second Bunny will
+                instantly apply the multiplier bonus to your score.
+              </li>
+            </ul>
+          </AccordionContent>
+        </AccordionPanel>
+        <AccordionPanel>
+          <AccordionTitle>When is the ranking updated?</AccordionTitle>
+          <AccordionContent>
+            <p className="flex flex-wrap items-center text-gray-500 dark:text-gray-400">
+              The ranking is updated approximately{" "}
+              <span className="font-bold whitespace-nowrap mx-1">
+                every 30 minutes.
+              </span>
+              You can check the last update time when hovering the{" "}
+              <span className="mx-1">
+                <Image
+                  src={"/icons/info.svg"}
+                  alt={"Information icon"}
+                  width={16}
+                  height={16}
+                  className="svg-grey inline"
+                />
+              </span>
+              icon next to &lsquo;
+              <span className="font-bold">Ranking</span>&lsquo;.
             </p>
           </AccordionContent>
         </AccordionPanel>
