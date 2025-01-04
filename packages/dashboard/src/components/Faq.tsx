@@ -5,7 +5,7 @@ import {
   AccordionPanel,
   AccordionTitle,
 } from "flowbite-react";
-import { DAILY_POINTS } from "@/utils/constants";
+import { DAILY_POINTS, LXP_MULTIPLIER, LXP_THRESHOLD } from "@/utils/constants";
 
 export default function Faq() {
   return (
@@ -56,12 +56,27 @@ export default function Faq() {
                 rel="nofollow noopener"
                 className="text-cyan-600 hover:underline dark:text-cyan-500"
               >
-                blog post&nbsp;
+                post&nbsp;
               </a>
               explaining everything.
             </p>
             <p className="text-gray-500 dark:text-gray-400">
-              Short answer: the score is computed based on the number of bunnies
+              Short answer: Every day, each NFT earns{" "}
+              {DAILY_POINTS.toLocaleString("en-US")} points.
+            </p>
+            <ul className="list-disc pl-5 text-gray-500 dark:text-gray-400">
+              <li>If you hold it for 1 week, its score is multiplied.</li>
+              <li>
+                If you&apos;ve held it since day 1, its score is multiplied
+                again.
+              </li>
+              <li>If you hold it for 1 month, you earn 5,000 extra points.</li>
+            </ul>
+            <p className="text-gray-500 dark:text-gray-400">
+              Afterward, the scores for each individual NFT are summed up. Then,
+              the total is multiplied if you hold more than 1 NFT. Additionally,
+              you receive an extra {LXP_MULTIPLIER} if you hold more than{" "}
+              {LXP_THRESHOLD.toLocaleString("en-US")} LXP.
             </p>
           </AccordionContent>
         </AccordionPanel>
