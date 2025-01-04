@@ -12,7 +12,11 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 w-full z-50">
       <Navbar fluid rounded>
-        <NavbarBrand href="https://flowbite-react.com">
+        <NavbarBrand
+          href="https://bunnyuniverse.xyz"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Image
             src="/logo.png"
             className="mr-2"
