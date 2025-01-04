@@ -90,6 +90,18 @@ export default function Faq() {
             </p>
           </AccordionContent>
         </AccordionPanel>
+        <AccordionPanel>
+          <AccordionTitle>
+            What happens to my wallet’s score if I sell an NFT?
+          </AccordionTitle>
+          <AccordionContent>
+            <p className="text-gray-500 dark:text-gray-400">
+              If a wallet sells an NFT, the NFT is no longer included in the
+              wallet’s global score. All points associated with the sold NFT,
+              including those earned in the past, are removed retroactively.
+            </p>
+          </AccordionContent>
+        </AccordionPanel>
       </Accordion>
     </>
   );
