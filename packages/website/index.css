@@ -46,7 +46,7 @@ a {
   gap: 50px;
 }
 
-.home-parent {
+.header {
   align-self: stretch;
   background-color: #ea2c5f;
   overflow: hidden;
@@ -65,7 +65,7 @@ a {
   flex-shrink: 0;
 }
 
-.bunnyuniverse-logo-parent {
+.hero {
   align-self: stretch;
   background: linear-gradient(180deg, #ea2c5f, #f6934c);
   height: 641px;
@@ -75,7 +75,7 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 10px 10px 0px;
+  padding: 10px 10px 0;
   box-sizing: border-box;
   gap: 10px;
   color: #210f04;
@@ -95,7 +95,7 @@ a {
 
 .oc-bunnyuniverse-bunnyrunning-icon1 {
   position: absolute;
-  top: 0px;
+  top: 0;
   left: 798.45px;
   width: 87.4px;
   height: 91.6px;
@@ -141,7 +141,7 @@ a {
 .oc-bunnyuniverse-bunnyrunning-icon6 {
   position: absolute;
   top: 383.99px;
-  left: 0px;
+  left: 0;
   width: 87.4px;
   height: 91.6px;
   object-fit: cover;
@@ -175,7 +175,7 @@ a {
   z-index: 2;
 }
 
-.welcome-parent {
+.running-bunny {
   align-self: stretch;
   background-color: #aa4b07;
   border-top: 3px solid #210f04;
@@ -194,7 +194,7 @@ a {
 .hop-in {
   position: relative;
   text-transform: uppercase;
-  text-shadow: -10.44444465637207px 10.44444465637207px 0px #210f04;
+  text-shadow: -10.44444465637207px 10.44444465637207px 0 #210f04;
 }
 
 .vector-icon1 {
@@ -240,7 +240,7 @@ a {
   gap: 20px;
   text-align: left;
   font-size: 30px;
-  font-family: Lexend;
+  font-family: Lexend, sans-serif;
 }
 
 .hop-in-parent {
@@ -279,7 +279,7 @@ a {
   color: #6d3302;
 }
 
-.frame-parent {
+.section-hop-in {
   align-self: stretch;
   background-color: #6d3302;
   border-top: 3px solid #210f04;
@@ -295,7 +295,7 @@ a {
   position: relative;
   line-height: 146px;
   text-transform: uppercase;
-  text-shadow: -10.44444465637207px 10.44444465637207px 0px #210f04;
+  text-shadow: -10.44444465637207px 10.44444465637207px 0 #210f04;
 }
 
 .bunny-universe-roadmap-wrapper {
@@ -331,7 +331,7 @@ a {
 
 .rocket-pixel-icon-parent {
   align-self: stretch;
-  box-shadow: -10.44444465637207px 10.44444465637207px 0px #210f04;
+  box-shadow: -10.44444465637207px 10.44444465637207px 0 #210f04;
   background-color: #dcdcdc;
   border: 3px solid #210f04;
   display: flex;
@@ -343,7 +343,7 @@ a {
   text-align: center;
   font-size: 50px;
   color: #210f04;
-  font-family: "Jersey 10";
+  font-family: "Jersey 10", sans-serif;
 }
 
 .launch-community {
@@ -416,10 +416,10 @@ a {
   align-content: flex-start;
   text-align: left;
   font-size: 30px;
-  font-family: Lexend;
+  font-family: Lexend, sans-serif;
 }
 
-.frame-container {
+.section-roadmap {
   align-self: stretch;
   background-color: #ea2c5f;
   border-top: 3px solid #210f04;
@@ -450,7 +450,7 @@ a {
   height: 34px;
 }
 
-.bunny-universe-all-rights-rese-parent {
+.footer {
   align-self: stretch;
   background-color: #6d3302;
   border-top: 3px solid #210f04;
@@ -464,10 +464,10 @@ a {
   justify-content: space-between;
   padding: 10px 40px;
   font-size: 20px;
-  font-family: Lexend;
+  font-family: Lexend, sans-serif;
 }
 
-.oc-bunnyuniverse-landingpage {
+.main-container {
   width: 100%;
   position: relative;
   overflow: hidden;
@@ -478,5 +478,5 @@ a {
   text-align: center;
   font-size: 40px;
   color: #cbff8c;
-  font-family: "Jersey 10";
+  font-family: "Jersey 10", sans-serif;
 }
