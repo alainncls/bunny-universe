@@ -63,7 +63,7 @@ export default function Footer({ className }: FooterProps) {
         </a>
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://t.co/0ccxMDk3QA"
+          href="https://discord.com/channels/1319056169276543017/1320469600361648270"
           target="_blank"
           rel="noopener noreferrer"
         >
