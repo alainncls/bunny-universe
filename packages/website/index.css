@@ -63,7 +63,6 @@ a {
   padding: var(--spacing-s) var(--spacing-l) var(--spacing-xs);
   display: flex;
   justify-content: space-between;
-  display: flex;
   align-items: center;
 }
 
