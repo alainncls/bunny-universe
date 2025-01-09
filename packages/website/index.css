@@ -63,7 +63,8 @@ a {
   padding: var(--spacing-s) var(--spacing-l) var(--spacing-xs);
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  display: flex;
+  align-items: center;
 }
 
 .header a {
@@ -486,6 +487,7 @@ a {
   .hop-in__item {
     flex-direction: column;
     text-align: center;
+    font-size: 23px;
   }
 
   .hop-in__text {
@@ -603,8 +605,6 @@ a {
 @media (max-width: 1024px) {
   .header {
     padding: 20px 40px 10px;
-    display: flex;
-    align-items: center;
     border: none;
   }
 
@@ -657,11 +657,19 @@ a {
   .hop-hop {
     border: none;
   }
+
+  .section-roadmap {
+    padding: var(--spacing-xl) var(--spacing-s);
+  }
 }
 
 /* Desktop styles */
 @media (min-width: 1025px) {
   .burger-menu {
+    display: none;
+  }
+
+  nav a:first-child {
     display: none;
   }
 }
