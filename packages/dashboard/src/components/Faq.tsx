@@ -50,17 +50,6 @@ export default function Faq() {
           <AccordionTitle>How is the score computed?</AccordionTitle>
           <AccordionContent>
             <p className="text-gray-500 dark:text-gray-400">
-              Check out the&nbsp;
-              <a
-                href="https://mirror.xyz/bunnyuniverse.eth/NsjwLQL2wgo2kQYV31l2777amcJ55AKxKuiQDh8Yj6k"
-                rel="nofollow noopener"
-                className="text-cyan-600 hover:underline dark:text-cyan-500"
-              >
-                post&nbsp;
-              </a>
-              explaining everything.
-            </p>
-            <p className="text-gray-500 dark:text-gray-400">
               Short answer: Every day, each NFT earns{" "}
               {DAILY_POINTS.toLocaleString("en-US")} points.
             </p>
