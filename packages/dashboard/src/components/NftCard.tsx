@@ -4,6 +4,8 @@ import { Card } from "flowbite-react";
 import Image from "next/image";
 import { TokenScore } from "@/types";
 import { DAILY_POINTS, MONTHLY_BONUS } from "@/utils/constants";
+import { rarity } from "@/utils/rarity_results";
+import { useMemo } from "react";
 
 type NftCardProps = {
   tokenId: string;
@@ -18,6 +20,10 @@ export default function NftCard({
   ownedSince,
   score,
 }: NftCardProps) {
+  const tokenRarity = useMemo(() => {
+    return rarity.find((token) => token.token_id == parseInt(tokenId));
+  }, [tokenId]);
+
   return (
     <Card
       className="max-w-sm"
@@ -35,8 +41,11 @@ export default function NftCard({
     >
       <div className="flex justify-between items-center">
         <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-          {tokenId}
+          #{tokenId}
         </h5>
+        <h6 className="font-normal text-gray-700 dark:text-gray-400">
+          Rarity rank {tokenRarity && tokenRarity?.rank}/2500
+        </h6>
         <a
           href={`https://element.market/assets/linea/0x2375f81ccd6665ab606239e6602dbb601d35ec77/${tokenId}`}
           target={"_blank"}

@@ -28,3 +28,9 @@ export type ScoreEntity = Score & {
   rank: number;
   lastUpdate?: Date;
 };
+
+export type Rarity = {
+  token_id: number;
+  rank: number;
+  score: number;
+};
