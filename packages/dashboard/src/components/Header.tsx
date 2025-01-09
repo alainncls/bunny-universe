@@ -1,5 +1,12 @@
 import Image from "next/image";
-import { Button, Navbar, NavbarBrand } from "flowbite-react";
+import {
+  Button,
+  Navbar,
+  NavbarBrand,
+  NavbarCollapse,
+  NavbarLink,
+  NavbarToggle,
+} from "flowbite-react";
 
 export default function Header() {
   return (
@@ -31,7 +38,17 @@ export default function Header() {
               Get a Bunny 🐇
             </Button>
           </a>
+          <NavbarToggle />
         </div>
+        <NavbarCollapse>
+          <NavbarLink
+            href="https://mirror.xyz/bunnyuniverse.eth/NsjwLQL2wgo2kQYV31l2777amcJ55AKxKuiQDh8Yj6k"
+            target="_blank"
+            rel="nofollow noopener"
+          >
+            How is the score computed?
+          </NavbarLink>
+        </NavbarCollapse>
       </Navbar>
     </header>
   );
