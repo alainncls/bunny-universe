@@ -41,6 +41,10 @@ a {
   text-decoration: none;
 }
 
+.uppercase {
+  text-transform: uppercase;
+}
+
 /* Layout */
 .main-container {
   width: 100%;
@@ -377,7 +381,7 @@ a {
     top: 0;
     right: -100%;
     height: 100vh;
-    background-color: var(--color-pink);
+    background-color: var(--color-brown);
     flex-direction: column;
     padding: var(--spacing-xl) var(--spacing-l);
     transition: right 0.3s ease;
@@ -466,6 +470,10 @@ a {
     --spacing-l: 30px;
   }
 
+  .main-container {
+    font-size: 33px;
+  }
+
   .hero {
     font-size: 60px;
   }
@@ -477,6 +485,11 @@ a {
 
   .hop-in__title {
     font-size: 80px;
+  }
+
+  .hop-in__item {
+    flex-direction: column;
+    text-align: center;
   }
 
   .hop-in__text {
@@ -492,9 +505,26 @@ a {
     height: auto;
   }
 
+  .roadmap__header {
+    margin-top: 20px;
+  }
+
   .roadmap__title {
-    font-size: 120px;
-    line-height: normal;
+    font-size: 80px;
+    line-height: 70px;
+  }
+
+  .roadmap__subtitle {
+    text-align: center;
+    font-size: 23px;
+    margin-bottom: 0;
+  }
+
+  .roadmap__item {
+    flex-direction: column;
+    text-align: center;
+    font-size: 23px;
+    gap: var(--spacing-xs);
   }
 
   .footer {
@@ -502,6 +532,11 @@ a {
     gap: var(--spacing-s);
     height: auto;
     padding: var(--spacing-s);
+  }
+
+  .running-bunny__main {
+    left: 50%;
+    transform: translateX(-115px);
   }
 
   .running-bunny__wind {
