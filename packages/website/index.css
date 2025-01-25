@@ -27,6 +27,12 @@
 }
 
 /* Reset & Base */
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   font-family: "Jersey 10", sans-serif;
@@ -107,6 +113,11 @@ a {
   justify-content: center;
 }
 
+.icon img {
+  width: 100%;
+  height: 100%;
+}
+
 /* Hero Section */
 .hero {
   width: 100%;
@@ -138,6 +149,23 @@ a {
   position: relative;
   color: var(--color-dark-brown);
   font-size: 150px;
+}
+
+.contract-address {
+  font-size: 40px;
+  left: auto;
+  position: absolute;
+  transform: translateX(-50%);
+  color: var(--color-dark-brown);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  z-index: 100;
+}
+
+.copy-icon {
+  height: 32px;
+  cursor: pointer;
 }
 
 .running-bunny__main {
