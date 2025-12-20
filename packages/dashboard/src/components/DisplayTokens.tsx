@@ -1,9 +1,12 @@
+"use client";
+
 import { Address } from "viem";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { formatDistance } from "date-fns";
 import { Score, Token } from "@/types";
 import NftCard from "@/components/NftCard";
+import { BUNNY_SUBGRAPH_ID, TOKENS_QUERY } from "@/utils/constants";
 
 type DisplayTokensProps = {
   address: Address;
@@ -17,24 +20,18 @@ export default function DisplayTokens({ address, score }: DisplayTokensProps) {
     async function fetchTokens() {
       try {
         const response = await axios.post(
-          `https://gateway.thegraph.com/api/${process.env.NEXT_PUBLIC_THE_GRAPH_API_KEY}/subgraphs/id/E99RzE1iK71GUk1qndxGTwZgpqYaF3boA1faZ4pCjrSw`,
+          `https://gateway.thegraph.com/api/${process.env.NEXT_PUBLIC_THE_GRAPH_API_KEY}/subgraphs/id/${BUNNY_SUBGRAPH_ID}`,
           {
-            query: `
-            query GetTokens($address: String!) {
-                  tokens(where: { owner: $address }) {
-                id
-                owner
-                ownedSince
-              }
-            }
-          `,
+            query: TOKENS_QUERY,
             variables: {
               address,
             },
           },
         );
-        const tokens = response.data.data.tokens;
-        setTokensHeld(tokens);
+        const tokens = response.data?.data?.tokens;
+        if (tokens) {
+          setTokensHeld(tokens);
+        }
       } catch (error) {
         console.error("Error fetching tokens:", error);
       }

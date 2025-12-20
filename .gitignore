@@ -2,6 +2,9 @@
 build/
 generated/
 
+# Matchstick test artifacts
+**/tests/.bin/
+
 # Dependency directories
 node_modules/
 

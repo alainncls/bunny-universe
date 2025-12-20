@@ -9,6 +9,13 @@ const eslintConfig = [
       "packages/functions/.netlify/",
     ],
   },
+  {
+    settings: {
+      next: {
+        rootDir: "packages/dashboard/",
+      },
+    },
+  },
 ];
 
 export default eslintConfig;

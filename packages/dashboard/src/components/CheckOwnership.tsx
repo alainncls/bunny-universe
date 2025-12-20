@@ -1,3 +1,5 @@
+"use client";
+
 import { useReadContract } from "wagmi";
 import { Address, erc721Abi } from "viem";
 import { BunnyUniverseContract } from "@/utils/constants";
