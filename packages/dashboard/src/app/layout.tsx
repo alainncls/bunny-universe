@@ -1,8 +1,13 @@
 "use client";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Web3Provider } from "@/app/Web3Provider";
+import dynamic from "next/dynamic";
 import { GoogleTagManager } from "@next/third-parties/google";
+
+// Dynamic import with ssr: false to prevent indexedDB error on server
+const Web3Provider = dynamic(() => import("@/app/Web3Provider").then((mod) => mod.Web3Provider), {
+  ssr: false,
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
