@@ -41,21 +41,19 @@ export default function Main({ className }: MainProps) {
   }, [address]);
 
   return (
-    <main
-      className={`flex flex-col gap-8 items-center sm:items-start ${className}`}
-    >
+    <main className={`flex flex-col gap-8 items-center w-full ${className}`}>
       {isLoading ? (
         <>
           <WalletButton />
           <Spinner aria-label="Loader spinner" size="xl" />
-          <div className="w-full max-w-2xl mx-auto sm:w-1/2">
+          <div className="w-full max-w-2xl mx-auto">
             <Faq />
           </div>
         </>
       ) : (
         <>
           {isConnected && address && score ? (
-            <div className="min-h-screen flex flex-col gap-8 items-center sm:items-start">
+            <div className="min-h-screen flex flex-col gap-8 items-center">
               <WalletButton />
               <CheckOwnership address={address} />
               <TotalScore score={score} />
@@ -64,7 +62,7 @@ export default function Main({ className }: MainProps) {
           ) : (
             <WalletButton />
           )}
-          <div className="w-full max-w-2xl mx-auto sm:w-1/2">
+          <div className="w-full max-w-2xl mx-auto">
             <Faq />
           </div>
         </>

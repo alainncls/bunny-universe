@@ -5,7 +5,7 @@ import {
   clearStore,
   describe,
   test,
-} from "matchstick-as/assembly/index";
+} from "matchstick-as";
 import { Address } from "@graphprotocol/graph-ts";
 import { handleAffiliateSell } from "../src/bunny-universe";
 import { createAffiliateSellEvent } from "./bunny-universe-utils";

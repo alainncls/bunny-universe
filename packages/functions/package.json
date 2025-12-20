@@ -6,9 +6,12 @@
     "functions:serve": "netlify functions:serve --functions . --port 8888"
   },
   "dependencies": {
-    "axios": "^1.12.0",
-    "dotenv": "^16.4.7",
-    "mongodb": "^6.12.0",
-    "viem": "^2.21.57"
+    "axios": "1.13.2",
+    "dotenv": "17.2.3",
+    "mongodb": "7.0.0",
+    "viem": "2.41.1"
+  },
+  "devDependencies": {
+    "netlify-cli": "^20.1.1"
   }
 }
