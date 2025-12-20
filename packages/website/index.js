@@ -26,4 +26,48 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Failed to copy: ", err);
     });
   });
+
+  // Game Modal Functionality
+  const gameModal = document.getElementById("gameModal");
+  const modalClose = document.querySelector(".modal-close");
+  const modalOverlay = document.querySelector(".modal-overlay");
+
+  // Check if user has already seen the modal (using sessionStorage)
+  const hasSeenModal = sessionStorage.getItem("hasSeenGameModal");
+
+  // Show modal on page load if not seen in this session
+  if (!hasSeenModal) {
+    setTimeout(() => {
+      gameModal.classList.add("active");
+      body.style.overflow = "hidden";
+    }, 500); // Small delay for better UX
+  }
+
+  // Close modal function
+  const closeModal = () => {
+    gameModal.classList.remove("active");
+    body.style.overflow = "";
+    sessionStorage.setItem("hasSeenGameModal", "true");
+  };
+
+  // Close button click
+  if (modalClose) {
+    modalClose.addEventListener("click", closeModal);
+  }
+
+  // Close on overlay click (outside modal)
+  if (modalOverlay) {
+    modalOverlay.addEventListener("click", (e) => {
+      if (e.target === modalOverlay) {
+        closeModal();
+      }
+    });
+  }
+
+  // Close on Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && gameModal.classList.contains("active")) {
+      closeModal();
+    }
+  });
 });
