@@ -63,13 +63,13 @@ type DefaultRoyaltySet @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type Token @entity {
+type Token @entity(immutable: false) {
   id: String! # Stringified on-chain token ID
   owner: Bytes! # Address of the owner
   ownedSince: BigInt! # Timestamp of ownership
 }
 
-type Holder @entity {
+type Holder @entity(immutable: false) {
   id: Bytes! # Address of the holder
   balance: Int! # Number of tokens held
   tokens: [Token!]! # List of token owned

@@ -2,19 +2,22 @@
   "name": "bunny-universe",
   "version": "1.0.0",
   "description": "",
-  "keywords": [],
   "license": "UNLICENSED",
-  "author": "alainnicolas.eth",
+  "author": "alain.linea.eth",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "lint": "eslint",
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write ."
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.2.0",
-    "eslint": "^9.17.0",
-    "eslint-config-next": "15.1.2",
-    "prettier": "^3.4.2",
-    "typescript": "^5.7.2"
+    "eslint": "9.17.0",
+    "eslint-config-next": "16.0.10",
+    "prettier": "3.4.2",
+    "typescript": "5.7.2"
+  },
+  "packageManager": "pnpm@10.26.1",
+  "engines": {
+    "node": "22.21.1"
   }
 }

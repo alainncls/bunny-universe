@@ -1,4 +1,4 @@
-build/
+cbuild/
 generated/
 .next/
 node_modules/
