@@ -22,21 +22,32 @@ import {
   erc721Abi,
   getAddress,
   http,
+  PublicClient,
 } from "viem";
 import { linea } from "viem/chains";
 
-export const getTokenBalances = async (address: string) => {
-  const publicClient = createPublicClient({
-    chain: linea,
-    transport: http(
-      `https://linea-mainnet.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`,
-    ),
-    batch: {
-      multicall: {
-        wait: 10,
+// Singleton viem client for better performance
+let publicClientInstance: PublicClient | null = null;
+
+function getPublicClient(): PublicClient {
+  if (!publicClientInstance) {
+    publicClientInstance = createPublicClient({
+      chain: linea,
+      transport: http(
+        `https://linea-mainnet.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`,
+      ),
+      batch: {
+        multicall: {
+          wait: 10,
+        },
       },
-    },
-  });
+    });
+  }
+  return publicClientInstance;
+}
+
+export const getTokenBalances = async (address: string) => {
+  const publicClient = getPublicClient();
 
   const addr = getAddress(address.toLowerCase());
 
@@ -62,17 +73,7 @@ export const getTokenBalances = async (address: string) => {
 };
 
 export const getMultipleTokensBalances = async (addresses: string[]) => {
-  const publicClient = createPublicClient({
-    chain: linea,
-    transport: http(
-      `https://linea-mainnet.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`,
-    ),
-    batch: {
-      multicall: {
-        wait: 100,
-      },
-    },
-  });
+  const publicClient = getPublicClient();
 
   const addrList: Address[] = addresses.map((address) =>
     getAddress(address.toLowerCase()),

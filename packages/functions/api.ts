@@ -2,6 +2,10 @@ import axios from "axios";
 import { isAddress } from "viem";
 import { config } from "dotenv";
 import { ScoreEntity, Token } from "../dashboard/src/types";
+import {
+  BUNNY_SUBGRAPH_ID,
+  TOKENS_QUERY,
+} from "../dashboard/src/utils/constants";
 import { computeTotalScore, getTokenBalances } from "./score";
 import { MongoClient, ServerApiVersion } from "mongodb";
 
@@ -52,23 +56,19 @@ const checkTokenNumber = (tokenNumber: number) => {
 
 const getTokensOwned = async (address: string) => {
   const response = await axios.post(
-    `https://gateway.thegraph.com/api/${NEXT_PUBLIC_THE_GRAPH_API_KEY}/subgraphs/id/E99RzE1iK71GUk1qndxGTwZgpqYaF3boA1faZ4pCjrSw`,
+    `https://gateway.thegraph.com/api/${NEXT_PUBLIC_THE_GRAPH_API_KEY}/subgraphs/id/${BUNNY_SUBGRAPH_ID}`,
     {
-      query: `
-            query GetTokens($address: String!) {
-                  tokens(where: { owner: $address }) {
-                id
-                owner
-                ownedSince
-              }
-            }
-          `,
+      query: TOKENS_QUERY,
       variables: {
         address,
       },
     },
   );
-  return response.data.data.tokens;
+  const tokens = response.data?.data?.tokens;
+  if (!tokens) {
+    throw new Error("Failed to fetch tokens from subgraph");
+  }
+  return tokens;
 };
 
 const checkTokensOwned = (tokensOwned: Token[], tokenNumber: number) => {

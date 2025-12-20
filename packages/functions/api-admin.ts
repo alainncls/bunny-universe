@@ -2,6 +2,10 @@ import { config } from "dotenv";
 import { MongoClient, ServerApiVersion } from "mongodb";
 import axios from "axios";
 import { Score, ScoreEntity, Token } from "../dashboard/src/types";
+import {
+  BUNNY_SUBGRAPH_ID,
+  ALL_TOKENS_QUERY,
+} from "../dashboard/src/utils/constants";
 import { computeTotalScore, getMultipleTokensBalances } from "./score";
 
 config({ path: ".env" });
@@ -39,17 +43,9 @@ const checkConfig = () => {
 
 const fetchTokens = async (skip: number) => {
   const response = await axios.post(
-    `https://gateway.thegraph.com/api/${NEXT_PUBLIC_THE_GRAPH_API_KEY}/subgraphs/id/E99RzE1iK71GUk1qndxGTwZgpqYaF3boA1faZ4pCjrSw`,
+    `https://gateway.thegraph.com/api/${NEXT_PUBLIC_THE_GRAPH_API_KEY}/subgraphs/id/${BUNNY_SUBGRAPH_ID}`,
     {
-      query: `
-            query GetTokens($skip: Int!) {
-              tokens(first: 1000, skip: $skip) {
-                id
-                owner
-                ownedSince
-              }
-            }
-          `,
+      query: ALL_TOKENS_QUERY,
       variables: {
         skip,
       },

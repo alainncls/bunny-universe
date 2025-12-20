@@ -1,4 +1,6 @@
-import { ReactNode } from "react";
+"use client";
+
+import { ReactNode, useState } from "react";
 import { http, WagmiProvider } from "wagmi";
 import { linea, mainnet } from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -31,9 +33,10 @@ const config = getDefaultConfig({
   appUrl: "https://earncarrot.bunnyuniverse.xyz",
   appIcon: "https://earncarrot.bunnyuniverse.xyz/logo.png",
 });
-const queryClient = new QueryClient();
 
 export const Web3Provider = ({ children }: Web3ProviderProps) => {
+  const [queryClient] = useState(() => new QueryClient());
+
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>

@@ -1,9 +1,13 @@
+"use client";
+
 import { Score } from "@/types";
 import { Card, Tooltip } from "flowbite-react";
 import EnsResolution from "@/components/EnsResolution";
 import { getAddress } from "viem";
 import Image from "next/image";
 import { formatDistance } from "date-fns";
+
+const LEADERBOARD_DISPLAY_COUNT = 6;
 
 type RankingProps = {
   score: Score;
@@ -79,14 +83,19 @@ export default function Ranking({ score }: RankingProps) {
         <p className="text-lg text-gray-500 dark:text-gray-400">Your rank</p>
       </Card>
       <ul className="m-8 lg:m-0 lg:mt-4">
-        {score.top10?.slice(0, 6).map((score, index) => (
-          <li key={score.holder} className="flex items-center justify-between">
-            <span className="text-gray-700 dark:text-gray-400">
-              {displayRank(index)} {displayHolder(score.holder)}
-            </span>
-            {displayScore(score.total)}
-          </li>
-        ))}
+        {score.top10
+          ?.slice(0, LEADERBOARD_DISPLAY_COUNT)
+          .map((score, index) => (
+            <li
+              key={score.holder}
+              className="flex items-center justify-between"
+            >
+              <span className="text-gray-700 dark:text-gray-400">
+                {displayRank(index)} {displayHolder(score.holder)}
+              </span>
+              {displayScore(score.total)}
+            </li>
+          ))}
       </ul>
     </>
   );

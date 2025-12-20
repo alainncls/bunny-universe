@@ -16,6 +16,7 @@
     "@graphprotocol/graph-ts": "^0.38.2"
   },
   "devDependencies": {
+    "assemblyscript": "0.19.23",
     "matchstick-as": "^0.6.0"
   }
 }
