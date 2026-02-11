@@ -6,7 +6,7 @@
     "functions:serve": "netlify functions:serve --functions . --port 8888"
   },
   "dependencies": {
-    "axios": "1.13.2",
+    "axios": "1.13.5",
     "dotenv": "17.2.3",
     "mongodb": "7.0.0",
     "viem": "2.41.1"
