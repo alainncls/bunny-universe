@@ -15,7 +15,7 @@
     "axios": "1.13.5",
     "date-fns": "4.1.0",
     "flowbite-react": "0.10.2",
-    "next": "15.5.9",
+    "next": "15.5.10",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "viem": "2.41.1",
