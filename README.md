@@ -51,7 +51,7 @@ The dashboard also provides a detailed breakdown of points per NFT.
 
 ### Prerequisites
 
-- **Node.js** (22.21.1 - see `.nvmrc`)
+- **Node.js** (22.22.0 - see `.nvmrc`)
 - **pnpm** (10.26.1 - enforced via `packageManager` field)
 - **MongoDB instance** (can be a free tier on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas))
 
